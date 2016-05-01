@@ -26,7 +26,8 @@ public class JsonDateTimeDeserializerTest {
         JsonDeserializer<Date> deserializer = new JsonDateTimeDeserializer();
         JsonParser parser = mock(JsonParser.class);
 
-        when(parser.getText()).thenReturn(null);
+        String date = null;
+        when(parser.getText()).thenReturn(date);
 
         deserializer.deserialize(parser, null);
 
@@ -38,7 +39,8 @@ public class JsonDateTimeDeserializerTest {
         JsonDeserializer<Date> deserializer = new JsonDateTimeDeserializer();
         JsonParser parser = mock(JsonParser.class);
 
-        when(parser.getText()).thenReturn("XXXX");
+        String date = "XXXX";
+        when(parser.getText()).thenReturn(date);
 
         deserializer.deserialize(parser, null);
 
@@ -50,11 +52,11 @@ public class JsonDateTimeDeserializerTest {
         JsonDeserializer<Date> deserializer = new JsonDateTimeDeserializer();
         JsonParser parser = mock(JsonParser.class);
 
-        String input = "2016-01-01T00:00:00.000Z";
-        when(parser.getText()).thenReturn(input);
+        String date = "2016-01-01T00:00:00.000Z";
+        when(parser.getText()).thenReturn(date);
 
-        Date date = deserializer.deserialize(parser, null);
-        assertThat(date).isEqualTo(DateUtils.parse(input));
+        Date output = deserializer.deserialize(parser, null);
+        assertThat(output).isEqualTo(DateUtils.parse(date));
 
     }
 }
