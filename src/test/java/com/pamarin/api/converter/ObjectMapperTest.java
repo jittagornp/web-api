@@ -151,7 +151,7 @@ public class ObjectMapperTest {
     }
 
     @Test
-    public void shouldBeOk_whenUnknowInputProperties() throws IOException {
+    public void shouldBeOk_whenUnknowJsonProperties() throws IOException {
 
         String json = "{ \"username\" : \"jittagornp\" }";
         User user = objectMapper.readValue(json, User.class);
