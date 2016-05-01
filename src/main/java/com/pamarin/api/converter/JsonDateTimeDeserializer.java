@@ -18,7 +18,7 @@ import java.util.Date;
  */
 public class JsonDateTimeDeserializer extends JsonDeserializer<Date> {
 
-    private final SimpleDateFormat format = new SimpleDateFormat(DateTimeFormat.DEFAULT);
+    private final SimpleDateFormat format = new SimpleDateFormat(DateTimePattern.STANDARD_PATTERN);
 
     @Override
     public Date deserialize(JsonParser jsonParser, DeserializationContext dc) throws IOException, JsonProcessingException {

@@ -3,7 +3,7 @@
  */
 package com.pamarin.api.util;
 
-import com.pamarin.api.converter.DateTimeFormat;
+import com.pamarin.api.converter.DateTimePattern;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,10 +29,10 @@ public class DateUtils {
     }
 
     public static Date parse(String date) throws ParseException {
-        return parse(date, DateTimeFormat.DEFAULT);
+        return parse(date, DateTimePattern.STANDARD_PATTERN);
     }
 
     public static String format(Date date) {
-        return format(date, DateTimeFormat.DEFAULT);
+        return format(date, DateTimePattern.STANDARD_PATTERN);
     }
 }

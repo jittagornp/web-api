@@ -19,7 +19,7 @@ import static java.util.Objects.isNull;
  */
 public class JsonDateTimeSerializer extends JsonSerializer<Date> {
 
-    private final Format format = new SimpleDateFormat(DateTimeFormat.DEFAULT);
+    private final Format format = new SimpleDateFormat(DateTimePattern.STANDARD_PATTERN);
 
     @Override
     public void serialize(Date value, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {

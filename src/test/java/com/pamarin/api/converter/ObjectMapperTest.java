@@ -79,7 +79,7 @@ public class ObjectMapperTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldBeThrowNullPointerException_whenInputIsNull() throws IOException {
+    public void shouldBeThrowNullPointerException_whenJsonIsNull() throws IOException {
 
         String json = null;
         User user = objectMapper.readValue(json, User.class);
@@ -87,7 +87,7 @@ public class ObjectMapperTest {
     }
 
     @Test(expected = JsonMappingException.class)
-    public void shouldBeThrowJsonMappingException_whenInputIsEmptyString() throws IOException {
+    public void shouldBeThrowJsonMappingException_whenJsonIsEmptyString() throws IOException {
 
         String json = "";
         User user = objectMapper.readValue(json, User.class);
@@ -95,7 +95,7 @@ public class ObjectMapperTest {
     }
 
     @Test(expected = JsonMappingException.class)
-    public void shouldBeThrowJsonMappingException_whenInputIsEmptyArray() throws IOException {
+    public void shouldBeThrowJsonMappingException_whenJsonIsEmptyArray() throws IOException {
 
         String json = "[]";
         User user = objectMapper.readValue(json, User.class);
@@ -103,7 +103,7 @@ public class ObjectMapperTest {
     }
 
     @Test(expected = JsonParseException.class)
-    public void shouldBeThrowJsonParseException_whenInputIsString() throws IOException {
+    public void shouldBeThrowJsonParseException_whenJsonIsString() throws IOException {
 
         String json = "string";
         User user = objectMapper.readValue(json, User.class);
@@ -111,7 +111,7 @@ public class ObjectMapperTest {
     }
 
     @Test(expected = JsonMappingException.class)
-    public void shouldBeThrowJsonMappingException_whenInputIsNumber() throws IOException {
+    public void shouldBeThrowJsonMappingException_whenJsonIsNumber() throws IOException {
 
         String json = "0";
         User user = objectMapper.readValue(json, User.class);
@@ -119,7 +119,7 @@ public class ObjectMapperTest {
     }
 
     @Test(expected = JsonMappingException.class)
-    public void shouldBeThrowJsonMappingException_whenInputIsBoolean() throws IOException {
+    public void shouldBeThrowJsonMappingException_whenJsonIsBoolean() throws IOException {
 
         String json = "true";
         User user = objectMapper.readValue(json, User.class);
@@ -127,7 +127,7 @@ public class ObjectMapperTest {
     }
 
     @Test
-    public void shouldBeOk_whenInputIsEmptyObject() throws IOException {
+    public void shouldBeOk_whenJsonIsEmptyObject() throws IOException {
 
         String json = "{}";
         User user = objectMapper.readValue(json, User.class);
@@ -139,7 +139,7 @@ public class ObjectMapperTest {
     }
 
     @Test
-    public void shouldBeOk_whenInputIsFirstNameAndLastName() throws IOException {
+    public void shouldBeOk_whenJsonIsFirstNameAndLastName() throws IOException {
 
         String json = "{ \"firstName\" : \"jittagorn\", \"lastName\" : \"pitak\" }";
         User user = objectMapper.readValue(json, User.class);
@@ -163,7 +163,7 @@ public class ObjectMapperTest {
     }
 
     @Test
-    public void shouldBeOk_whenInputIsBirthDate() throws IOException, ParseException {
+    public void shouldBeOk_whenJsonIsBirthDate() throws IOException, ParseException {
 
         String bithDate = "2016-01-01T18:30:15.999Z";
 
@@ -177,17 +177,17 @@ public class ObjectMapperTest {
     }
 
     @Test
-    public void shouldBeNull_whenOutputIsNull() throws JsonProcessingException {
+    public void shouldBeNull_whenUserIsNull() throws JsonProcessingException {
 
-        Object output = null;
-        String json = objectMapper.writeValueAsString(output);
+        User user = null;
+        String json = objectMapper.writeValueAsString(user);
 
         assertThat(json).isEqualTo("null");
 
     }
 
     @Test
-    public void shouldBeEmptyString_whenOutputIsEmptyString() throws JsonProcessingException {
+    public void shouldBeEmptyString_whenUserIsEmptyString() throws JsonProcessingException {
 
         Object output = "";
         String json = objectMapper.writeValueAsString(output);
@@ -197,7 +197,7 @@ public class ObjectMapperTest {
     }
 
     @Test
-    public void shouldBeOk_whenOutputIsFirstNameAndBirthDate() throws ParseException, JsonProcessingException {
+    public void shouldBeOk_whenUserIsFirstNameAndBirthDate() throws ParseException, JsonProcessingException {
 
         String bithDate = "2016-01-01T18:30:15.999Z";
 
