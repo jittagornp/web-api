@@ -177,20 +177,20 @@ public class ObjectMapperTest {
     }
 
     @Test
-    public void shouldBeNull_whenUserIsNull() throws JsonProcessingException {
+    public void shouldBeNull_whenObjectIsNull() throws JsonProcessingException {
 
-        User user = null;
-        String json = objectMapper.writeValueAsString(user);
+        Object obj = null;
+        String json = objectMapper.writeValueAsString(obj);
 
         assertThat(json).isEqualTo("null");
 
     }
 
     @Test
-    public void shouldBeEmptyString_whenUserIsEmptyString() throws JsonProcessingException {
+    public void shouldBeEmptyString_whenObjectIsEmptyString() throws JsonProcessingException {
 
-        Object output = "";
-        String json = objectMapper.writeValueAsString(output);
+        Object obj = "";
+        String json = objectMapper.writeValueAsString(obj);
 
         assertThat(json).isEqualTo("\"\"");
 
