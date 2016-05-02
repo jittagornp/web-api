@@ -12,6 +12,7 @@ import com.pamarin.api.util.DateUtils;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Locale;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,6 +31,7 @@ public class ObjectMapperTest {
         private String lastName;
         private Date birthDate;
         private String link;
+        private Locale locale;
 
         public String getFirstName() {
             return firstName;
@@ -61,6 +63,14 @@ public class ObjectMapperTest {
 
         public void setLink(String link) {
             this.link = link;
+        }
+
+        public Locale getLocale() {
+            return locale;
+        }
+
+        public void setLocale(Locale locale) {
+            this.locale = locale;
         }
 
     }
@@ -136,6 +146,7 @@ public class ObjectMapperTest {
         assertThat(user.getLastName()).isNull();
         assertThat(user.getBirthDate()).isNull();
         assertThat(user.getLink()).isNull();
+        assertThat(user.getLocale()).isNull();
     }
 
     @Test
@@ -148,6 +159,7 @@ public class ObjectMapperTest {
         assertThat(user.getLastName()).isEqualTo("pitak");
         assertThat(user.getBirthDate()).isNull();
         assertThat(user.getLink()).isNull();
+        assertThat(user.getLocale()).isNull();
     }
 
     @Test
@@ -160,6 +172,7 @@ public class ObjectMapperTest {
         assertThat(user.getLastName()).isNull();
         assertThat(user.getBirthDate()).isNull();
         assertThat(user.getLink()).isNull();
+        assertThat(user.getLocale()).isNull();
     }
 
     @Test
@@ -174,6 +187,37 @@ public class ObjectMapperTest {
         assertThat(user.getLastName()).isNull();
         assertThat(user.getBirthDate()).isEqualTo(DateUtils.parse(bithDate));
         assertThat(user.getLink()).isNull();
+        assertThat(user.getLocale()).isNull();
+    }
+
+    @Test
+    public void shouldBeOk_whenJsonIsLocale__th_TH() throws IOException, ParseException {
+
+        String localeCode = "th_TH";
+
+        String json = "{ \"locale\" : \"" + localeCode + "\" }";
+        User user = objectMapper.readValue(json, User.class);
+
+        assertThat(user.getFirstName()).isNull();
+        assertThat(user.getLastName()).isNull();
+        assertThat(user.getBirthDate()).isNull();
+        assertThat(user.getLink()).isNull();
+        assertThat(user.getLocale()).isEqualTo(new Locale("th", "TH"));
+    }
+
+    @Test
+    public void shouldBeOk_whenJsonIsLocale__en_US() throws IOException, ParseException {
+
+        String localeCode = "en_US";
+
+        String json = "{ \"locale\" : \"" + localeCode + "\" }";
+        User user = objectMapper.readValue(json, User.class);
+
+        assertThat(user.getFirstName()).isNull();
+        assertThat(user.getLastName()).isNull();
+        assertThat(user.getBirthDate()).isNull();
+        assertThat(user.getLink()).isNull();
+        assertThat(user.getLocale()).isEqualTo(Locale.US);
     }
 
     @Test
@@ -219,6 +263,30 @@ public class ObjectMapperTest {
 
         String json = objectMapper.writeValueAsString(user);
         String expteced = "{\"link\":\"https:\\/\\/www.facebook.com\\/jittagornp\"}";
+
+        assertThat(json).isEqualTo(expteced);
+    }
+
+    @Test
+    public void shouldBeOk_whenLocaleIs__th_TH() throws JsonProcessingException {
+
+        User user = new User();
+        user.setLocale(new Locale("th", "TH"));
+
+        String json = objectMapper.writeValueAsString(user);
+        String expteced = "{\"locale\":\"th_TH\"}";
+
+        assertThat(json).isEqualTo(expteced);
+    }
+
+    @Test
+    public void shouldBeOk_whenLocaleIs__en_US() throws JsonProcessingException {
+
+        User user = new User();
+        user.setLocale(Locale.US);
+
+        String json = objectMapper.writeValueAsString(user);
+        String expteced = "{\"locale\":\"en_US\"}";
 
         assertThat(json).isEqualTo(expteced);
     }
