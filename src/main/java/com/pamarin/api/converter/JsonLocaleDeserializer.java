@@ -31,15 +31,15 @@ public class JsonLocaleDeserializer extends JsonDeserializer<Locale> {
         String[] split = StringUtils.split(localeCode, "_");
 
         if (split.length != 2) {
-            throw new IOException("not support locale");
+            throw new IOException("not support locale, require language and country");
         }
 
         if (!hasText(split[0])) {
-            throw new IOException("not support locale");
+            throw new IOException("not support locale, require language");
         }
 
         if (!hasText(split[1])) {
-            throw new IOException("not support locale");
+            throw new IOException("not support locale, require country");
         }
 
         return new Locale(split[0], split[1]);

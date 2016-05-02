@@ -26,7 +26,7 @@ public class ObjectMapperFactory {
 
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        mapper.getFactory().setCharacterEscapes(new HTMLCharacterEscapes());
+        mapper.getFactory().setCharacterEscapes(new StringCharacterEscapes());
 
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.addSerializer(Date.class, new JsonDateTimeSerializer());

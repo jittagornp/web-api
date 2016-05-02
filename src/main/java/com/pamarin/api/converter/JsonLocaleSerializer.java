@@ -22,16 +22,17 @@ public class JsonLocaleSerializer extends JsonSerializer<Locale> {
 
     @Override
     public void serialize(Locale value, JsonGenerator gen, SerializerProvider sp) throws IOException, JsonProcessingException {
+        
         if (isNull(value)) {
             return;
         }
 
         if (!hasText(value.getLanguage())) {
-            throw new IOException("not support locale");
+            throw new IOException("not support locale, require language");
         }
 
         if (!hasText(value.getCountry())) {
-            throw new IOException("not support locale");
+            throw new IOException("not support locale, require country");
         }
 
         String localeCode = value.getLanguage() + "_" + value.getCountry();
